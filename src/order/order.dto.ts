@@ -11,6 +11,7 @@ export class OrderDto{
     @ValidateNested({each:true})
     @Type(()=>OrderItemDto)
     items: OrderItemDto[]
+
 }
 
 export class OrderItemDto{

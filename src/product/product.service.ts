@@ -14,7 +14,7 @@ export class ProductService {
     constructor(
         private prisma: PrismaService, 
         private paginationService: PaginationService, 
-        private categoryService: CategoryService
+        private categoryService: CategoryService, 
     ){}
 
     async getAll(dto: GetAllProductDto = {}){
@@ -204,19 +204,29 @@ export class ProductService {
         })
         return products
     }
+ 
+    async create(dto: ProductDto) {
+        const product = await this.prisma.product.create({
+            data: {
+                ...dto,
+                slug: generateSlug(dto.name),
+            },
+        });
+    
+        return product.id;
+    }
 
-      
-  async create (){
-    const product = await this.prisma.product.create({
-        data:{
-            description:"",
-            name: "", 
-            price: 0, 
-            slug: ""
-        }
-    })
-    return product.id
-  }
+    // async create(dto: ProductDto, images: Express.Multer.File[]) {
+    //     const product = await this.prisma.product.create({
+    //         data: {
+    //             ...dto,
+    //             images: images.map(file => file.filename), 
+    //             slug: generateSlug(dto.name),
+    //         },
+    //     });
+    
+    //     return product.id;
+    // }
 
   async update(id:number, dto: ProductDto){
     const {description, images, price, name, categoryId} = dto

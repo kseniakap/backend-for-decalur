@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, HttpCode, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, HttpCode, UsePipes, ValidationPipe, Param} from '@nestjs/common';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { OrderService } from './order.service';
 import { CurrentUser } from 'src/auth/decorators/user.decorator';
@@ -9,13 +9,19 @@ import { OrderDto } from './order.dto';
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  //получение всех заказов на сайте
+  // Обработчик GET-запроса для получения всех заказов
   @Get()
   @Auth("admin")
-  getAll(){
-    return this.orderService.getAll()
+  getAllOrders() {
+    return this.orderService.getAll();
   }
 
+  // Обработчик GET-запроса для получения информации об одном заказе
+  @Get(':id')
+  @Auth("admin")
+  async getProduct(@Param("id") id: string){
+    return this.orderService.getOrderById(+id)
+  }
   //получение пользователем его заказов
   @Get('by-user')
   @Auth()

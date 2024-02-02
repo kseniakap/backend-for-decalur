@@ -10,7 +10,7 @@ export class UserDto {
 
     @IsOptional()
     @IsString()
-    name: string;
+    name?: string;
 
     @IsOptional()
     @IsString()
@@ -19,4 +19,8 @@ export class UserDto {
     @IsOptional()
     @IsString()
     phone?: string;
+
+    @IsOptional()
+    @IsString()
+    address?: string;
 }

@@ -7,6 +7,8 @@ export enum EnumProductSort{
     NEWEST = "newest", 
     OLDEST = "oldest"
 }
+//проверка
+
 
 export class GetAllProductDto extends PaginationDto{
     @IsOptional()

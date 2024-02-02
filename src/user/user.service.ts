@@ -63,6 +63,7 @@ export class UserService {
                 name: dto.name, 
                 avatarPath: dto.avatarPath, 
                 phone:dto.phone, 
+                address: dto.address,
                 password: dto.password ?  await argon2.hash(dto.password) : user.password
             }
         })

@@ -6,6 +6,7 @@ import { PaginationService } from 'src/pagination/pagination.service';
 import { PaginationModule } from 'src/pagination/pagination.module';
 import { CategoryModule } from 'src/category/category.module';
 
+
 @Module({
   controllers: [ProductController],
   imports: [PaginationModule, CategoryModule], 

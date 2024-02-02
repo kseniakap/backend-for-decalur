@@ -20,8 +20,18 @@ export const productReturnObject: Prisma.ProductSelect = {
             createdAt:"desc"
         }
     },
+   
 
 }
+
+export const orderReturnObject: Prisma.ProductSelect = {
+    images:true, 
+    id:true, 
+    name: true, 
+    price: true, 
+
+}
+
 
 export const productReturnObjectFullest:Prisma.ProductSelect = {
     ...productReturnObject ,

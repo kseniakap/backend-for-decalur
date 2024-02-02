@@ -16,9 +16,9 @@ model User {
 
   isAdmin Boolean @default(false) @map("is_admin")
 
-  name       String @unique
+  name       String @default("")
   avatarPath String @default("/uploads/default-avatar.png") @map("avatar_path")
-
+  address     String    @default("")
   phone     String    @default("")
   reviews   Review[]
   orders    Order[]
@@ -31,11 +31,11 @@ model Product {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   name        String   @unique
-  slug        String   @unique
-  description String
   price       Int
+  description String
   images      String[]
-
+  slug        String   @unique
+ 
   orderItems OrderItem[]
   reviews    Review[]
 

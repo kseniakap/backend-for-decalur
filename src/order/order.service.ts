@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { OrderDto } from './order.dto';
-import { productReturnObject } from 'src/product/return-product.object';
+import { productReturnObject, orderReturnObject } from 'src/product/return-product.object';
+import { returnUserObject } from 'src/user/return-user.object';
 // import * as YooKassa from "yookassa"
 // import { PaymentStatusDto } from './payment-status.dto';
 // import { EnumOrderStatus } from '@prisma/client';
@@ -15,25 +16,49 @@ import { productReturnObject } from 'src/product/return-product.object';
 export class OrderService {
     constructor(private prisma: PrismaService){}
 
-     //получение всех заказов на сайте
+    // Получение информации только об одном заказе
+    async getOrderById(id:number) {
+        const product = await this.prisma.order.findUnique({
+            where:{
+                id
+            }, 
+
+            include:{
+                items:{
+                    include:{
+                        product: {
+                            select: orderReturnObject
+                        }
+                    }
+                }, 
+            }
+        })
+        if(!product) {
+            throw new Error("Product not fount")
+        }
+        return product
+    }
+    // Получение всех заказов на сайте
     async getAll(){
         return this.prisma.order.findMany({
             orderBy:{
                 createdAt: "desc"
             },
             include:{
+                user:{
+                    select: returnUserObject
+                },
                 items:{
                     include:{
                         product: {
-                            select: productReturnObject
+                            select: orderReturnObject
                         }
                     }
-                }
+                }, 
             }
         })
     }
-
-    //получение пользователем его заказов
+    // Получение пользователем его заказов
     async getByUserId(userId: number){
         return this.prisma.order.findMany({
             where:{
@@ -71,6 +96,7 @@ export class OrderService {
                         id: userId
                     }
                 },
+                
             }
         })
         // const payment = await yooKassa.createPayment({

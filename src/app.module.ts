@@ -12,16 +12,28 @@ import { StatisticsModule } from './statistics/statistics.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { path } from 'app-root-path';
+import { PrismaService } from './prisma.service';
+// import { join } from 'path';
+
 
 @Module({
+  controllers: [AppController],
+  providers: [AppService, PrismaService],
   imports: [
     //Загрузка статичных файлов (картинок из папки uploads)
     ServeStaticModule.forRoot({
       rootPath: `${path}/uploads`,
       serveRoot: '/uploads'
     }),
-    ConfigModule.forRoot(),AuthModule, UserModule, ProductModule, ReviewModule, CategoryModule, OrderModule, StatisticsModule, PaginationModule],
-  controllers: [AppController],
-  providers: [AppService],
+    ConfigModule.forRoot(), 
+    AuthModule,  
+    UserModule, 
+    ProductModule, 
+    ReviewModule, 
+    CategoryModule, 
+    OrderModule, 
+    StatisticsModule, 
+    PaginationModule
+  ],
 })
 export class AppModule {}
