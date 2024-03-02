@@ -23,19 +23,19 @@ export class StatisticsService {
 
         return [
             {
-                name: "Orders", 
+                name: "Заказы", 
                 value: ordersCount
             }, 
             {
-                name: "Users", 
+                name: "Пользователи", 
                 value: usersCount
             },
             {
-                name: "Reviews", 
+                name: "Отзывы", 
                 value: reviewsCount
             }, 
             {
-                name: "Total amount", 
+                name: "Общая сумма заказов", 
                 value: totalAmount._sum.total || 0
             }
         ]

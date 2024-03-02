@@ -6,6 +6,7 @@ export const returnReviewObject:Prisma.ReviewSelect ={
     user:{
         select:returnUserObject
     }, 
+
     createdAt: true, 
     text: true, 
     rating: true

@@ -38,7 +38,7 @@ export class ProductController {
   //Создание нового товара
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
-  @Auth("admin")
+  // @Auth("admin")
   @Post()
   async createProduct(@Body() dto: ProductDto){
     return this.productService.create(dto)

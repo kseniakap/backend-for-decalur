@@ -1,4 +1,4 @@
-import { Controller, UsePipes, ValidationPipe, Get, Post,  Param,  Body, HttpCode} from '@nestjs/common';
+import { Controller, UsePipes, ValidationPipe, Get, Post,  Param,  Body, HttpCode, Delete} from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CurrentUser } from 'src/auth/decorators/user.decorator';
@@ -35,5 +35,14 @@ export class ReviewController {
   async getAverageByProduct(@Param("productId") productId: string){
     return this.reviewService.getAverageValurByProductId(+productId)
   }
+
+  //удаление отзыва
+  @HttpCode(200)
+  @Auth("admin")
+  @Delete(':id')
+  async delete( @Param('id') id: string ){
+    return this.reviewService.delete(+id)
+  }
+
 
 }

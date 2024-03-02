@@ -50,8 +50,8 @@ export class ProductService {
             convertToNumber(dto.minPrice), 
             convertToNumber(dto.maxPrice)
         ))
-        if(dto.categotyId)
-                filters.push(this.getCategoryFilter(+dto.categotyId))
+        if(dto.categoryId)
+            filters.push(this.getCategoryFilter(+dto.categoryId))
 
         return filters.length ? {AND: filters} : {}
     }
@@ -209,24 +209,14 @@ export class ProductService {
         const product = await this.prisma.product.create({
             data: {
                 ...dto,
+                price: Number(dto.price),
+                categoryId: Number(dto.categoryId),
                 slug: generateSlug(dto.name),
             },
         });
     
         return product.id;
     }
-
-    // async create(dto: ProductDto, images: Express.Multer.File[]) {
-    //     const product = await this.prisma.product.create({
-    //         data: {
-    //             ...dto,
-    //             images: images.map(file => file.filename), 
-    //             slug: generateSlug(dto.name),
-    //         },
-    //     });
-    
-    //     return product.id;
-    // }
 
   async update(id:number, dto: ProductDto){
     const {description, images, price, name, categoryId} = dto

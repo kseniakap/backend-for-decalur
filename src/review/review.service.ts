@@ -46,4 +46,13 @@ export class ReviewService {
         _avg:{rating: true}
     }).then(data=> data._avg)
   }
+
+  //Удаление отзыва
+  async delete(id:number){
+    return this.prisma.review.delete({
+        where:{
+            id
+        }
+    })
+  }
 }

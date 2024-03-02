@@ -33,5 +33,5 @@ export class GetAllProductDto extends PaginationDto{
 
     @IsOptional()
     @IsString()
-    categotyId?:string
+    categoryId?:string
 }

@@ -34,6 +34,5 @@ export const orderReturnObject: Prisma.ProductSelect = {
 
 
 export const productReturnObjectFullest:Prisma.ProductSelect = {
-    ...productReturnObject ,
-    
+    ...productReturnObject , 
 }

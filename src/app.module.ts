@@ -13,7 +13,7 @@ import { PaginationModule } from './pagination/pagination.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { path } from 'app-root-path';
 import { PrismaService } from './prisma.service';
-// import { join } from 'path';
+import { FilesModule } from './files/files.module';
 
 
 @Module({
@@ -33,7 +33,7 @@ import { PrismaService } from './prisma.service';
     CategoryModule, 
     OrderModule, 
     StatisticsModule, 
-    PaginationModule
+    PaginationModule, FilesModule
   ],
 })
 export class AppModule {}
