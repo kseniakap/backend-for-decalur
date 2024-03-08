@@ -44,11 +44,12 @@ export class CategoryService {
     })
   }
   
-  async create (){
+  async create (dto: CategoryDto){
     return  this.prisma.category.create({
       data:{
-        name:"",
-        slug:""
+        ...dto, 
+        name:dto.name,
+        slug: generateSlug(dto.name), 
       }
     })
   }
@@ -61,6 +62,7 @@ export class CategoryService {
           data:{
               name: dto.name, 
               slug: generateSlug(dto.name)
+              
           }
       })
   }

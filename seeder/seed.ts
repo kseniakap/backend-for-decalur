@@ -27,7 +27,7 @@ const createProducts = async(quantity: number)=>{
                     create:{
                         name: categoryName, 
                         slug: generateSlug(categoryName),
-                        image: faker.animal.cat()
+                        images: faker.animal.cat()
                     }
                 },
                 reviews:{

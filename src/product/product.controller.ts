@@ -3,7 +3,7 @@ import { Controller, Query, Get, UsePipes, Param, HttpCode, ValidationPipe,Put, 
 import { ProductService } from './product.service';
 import {GetAllProductDto } from './dto/get-all.product.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
-import { ProductDto } from './dto/product.dto';
+import { ProductDto, ProductUpdateDto } from './dto/product.dto';
 
 
 @Controller('products')
@@ -48,9 +48,9 @@ export class ProductController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Put(':id')
-  @Auth("admin")
-  async updateProduct(@Param("id") id: string, @Body() dto: ProductDto){
-    return this.productService.update(+id, dto)
+  // @Auth("admin")
+  async updateProduct(@Param("id") id: string, @Body() dto: ProductUpdateDto){
+      return this.productService.update(+id, dto)
   }
   //Удаление товара
   @HttpCode(200)

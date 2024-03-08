@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { productReturnObject, productReturnObjectFullest } from './return-product.object';
-import { ProductDto } from './dto/product.dto';
+import { ProductDto, ProductUpdateDto } from './dto/product.dto';
 import { Prisma } from '@prisma/client';
 import { generateSlug } from 'src/utils/generate-slug';
 import { EnumProductSort, GetAllProductDto } from './dto/get-all.product.dto';
@@ -218,29 +218,21 @@ export class ProductService {
         return product.id;
     }
 
-  async update(id:number, dto: ProductDto){
-    const {description, images, price, name, categoryId} = dto
-    //Проверка на наличие категории
-    await this.categoryService.byId(categoryId)
+    async update(id:number, dto: ProductUpdateDto){
+        const {description, price, categoryId} = dto
+    
+        return this.prisma.product.update({
+            where:{
+                id
+            }, 
+            data:{
+                description, 
+                price: +price,  
+                categoryId: +categoryId
+            }
+        })
+    } 
 
-    return this.prisma.product.update({
-        where:{
-            id
-        }, 
-        data:{
-            description, 
-            images, 
-            price, 
-            name, 
-            slug: generateSlug(name),
-            category:{
-                connect:{
-                    id: categoryId
-                }
-            } 
-        }
-    })
-  }
   async delete(id:number){
     return this.prisma.product.delete({
         where:{

@@ -22,7 +22,6 @@ export class FilesController {
   )
   uploadMultiple(@UploadedFiles() files) {
     const fileLinks = files.map((file) => `http://localhost:4000/uploads/${file.filename}`);
-        console.log(fileLinks)
         return fileLinks;
 
   }

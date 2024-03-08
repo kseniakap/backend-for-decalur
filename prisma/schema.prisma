@@ -30,7 +30,7 @@ model Product {
   name        String      @unique
   slug        String      @unique
   description String
-  price       Int
+  price       Int  
   images      String[]
   categoryId  Int?        @map("category_id")
   userId      Int?        @map("user_id")
@@ -46,7 +46,7 @@ model Category {
   updatedAt DateTime  @updatedAt @map("updated_at")
   name      String    @unique
   slug      String    @unique
-  image     String    @default("")
+  images     String    @default("")
   products  Product[]
 }
 
