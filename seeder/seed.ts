@@ -19,6 +19,7 @@ const createProducts = async(quantity: number)=>{
                 slug: generateSlug(productName),
                 description:faker.commerce.productDescription(),
                 price: +faker.commerce.price(),
+                measure: "м",
                 images: Array.from({length:getRandomNumber(2, 6)}).map(()=>
                 // faker.image.urlPicsumPhotos({ width: 128 })
                 `/uploads/${faker.number.int({min: 1, max:5})}.jpg`

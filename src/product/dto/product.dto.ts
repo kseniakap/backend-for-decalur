@@ -9,6 +9,9 @@ export class ProductDto implements Prisma.ProductUpdateInput{
     @Min(0)
     price: number
 
+    @IsString()
+    measure: string
+
     @IsOptional()
     @IsString()
     description: string
@@ -33,6 +36,9 @@ export class ProductUpdateDto implements Prisma.ProductUpdateInput{
     @IsNumber()
     @Min(0)
     price: number
+
+    @IsString()
+    measure: string
 
     @IsOptional()
     @IsString()
